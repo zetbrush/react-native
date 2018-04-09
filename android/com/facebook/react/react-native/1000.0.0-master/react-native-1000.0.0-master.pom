@@ -11,7 +11,7 @@
   <url>https://github.com/facebook/react-native</url>
   <licenses>
     <license>
-      <name>BSD License</name>
+      <name>MIT License</name>
       <url>https://github.com/facebook/react-native/blob/master/LICENSE</url>
       <distribution>repo</distribution>
     </license>
@@ -49,19 +49,19 @@
     <dependency>
       <groupId>com.facebook.fresco</groupId>
       <artifactId>fresco</artifactId>
-      <version>1.3.0</version>
+      <version>1.8.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.facebook.fresco</groupId>
       <artifactId>imagepipeline-okhttp3</artifactId>
-      <version>1.3.0</version>
+      <version>1.8.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.facebook.soloader</groupId>
       <artifactId>soloader</artifactId>
-      <version>0.1.0</version>
+      <version>0.3.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -73,19 +73,19 @@
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp</artifactId>
-      <version>3.6.0</version>
+      <version>3.8.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp-urlconnection</artifactId>
-      <version>3.6.0</version>
+      <version>3.8.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.squareup.okio</groupId>
       <artifactId>okio</artifactId>
-      <version>1.13.0</version>
+      <version>1.14.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

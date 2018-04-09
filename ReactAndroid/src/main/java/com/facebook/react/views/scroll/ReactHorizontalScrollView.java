@@ -1,10 +1,8 @@
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
  *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.react.views.scroll;
@@ -17,10 +15,13 @@ import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewCompat;
+import android.graphics.drawable.LayerDrawable;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.HorizontalScrollView;
 import com.facebook.infer.annotation.Assertions;
+import com.facebook.react.common.ReactConstants;
 import com.facebook.react.uimanager.MeasureSpecAssertions;
 import com.facebook.react.uimanager.ReactClippingViewGroup;
 import com.facebook.react.uimanager.ReactClippingViewGroupHelper;
@@ -51,6 +52,7 @@ public class ReactHorizontalScrollView extends HorizontalScrollView implements
   private @Nullable Drawable mEndBackground;
   private int mEndFillColor = Color.TRANSPARENT;
   private int mSnapInterval = 0;
+  private String mSnapAlignment = "start";
   private ReactViewBackgroundManager mReactBackgroundManager;
 
   public ReactHorizontalScrollView(Context context) {
@@ -95,6 +97,13 @@ public class ReactHorizontalScrollView extends HorizontalScrollView implements
 
   public void setSnapInterval(int snapInterval) {
     mSnapInterval = snapInterval;
+    if(snapInterval != 0) {
+      mPagingEnabled = true;
+    }
+  }
+
+  public void setSnapAlignment(String snapAlignment) {
+    mSnapAlignment = snapAlignment;
   }
 
   public void flashScrollIndicators() {
@@ -140,12 +149,19 @@ public class ReactHorizontalScrollView extends HorizontalScrollView implements
       return false;
     }
 
-    if (super.onInterceptTouchEvent(ev)) {
-      NativeGestureUtil.notifyNativeGestureStarted(this, ev);
-      ReactScrollViewHelper.emitScrollBeginDragEvent(this);
-      mDragging = true;
-      enableFpsListener();
-      return true;
+    try {
+      if (super.onInterceptTouchEvent(ev)) {
+        NativeGestureUtil.notifyNativeGestureStarted(this, ev);
+        ReactScrollViewHelper.emitScrollBeginDragEvent(this);
+        mDragging = true;
+        enableFpsListener();
+        return true;
+      }
+    } catch (IllegalArgumentException e) {
+      // Log and ignore the error. This seems to be a bug in the android SDK and
+      // this is the commonly accepted workaround.
+      // https://tinyurl.com/mw6qkod (Stack Overflow)
+      Log.w(ReactConstants.TAG, "Error intercepting touch event.", e);
     }
 
     return false;
@@ -226,6 +242,17 @@ public class ReactHorizontalScrollView extends HorizontalScrollView implements
       return mSnapInterval;
     }
     return getWidth();
+  }
+
+  private int getAlignmentOffset() {
+    int width = getWidth();
+    int snapInterval = getSnapInterval();
+    if (mSnapAlignment.equals("center")) {
+      return (width - snapInterval)/2;
+    } else if(mSnapAlignment.equals("end")) {
+      return (width - snapInterval);
+    }
+    return 0;
   }
 
   public void setEndFillColor(int color) {
@@ -341,7 +368,7 @@ public class ReactHorizontalScrollView extends HorizontalScrollView implements
     if (predictedX > page * width + width / 2) {
       page = page + 1;
     }
-    smoothScrollTo(page * width, getScrollY());
+    smoothScrollTo(page * width - getAlignmentOffset(), getScrollY());
   }
 
   @Override

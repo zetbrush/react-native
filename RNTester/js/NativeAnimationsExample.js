@@ -1,10 +1,8 @@
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
  *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
  *
  * @flow
  * @providesModule NativeAnimationsExample
@@ -255,6 +253,67 @@ class EventExample extends React.Component<{}, $FlowFixMeState> {
   }
 }
 
+class TrackingExample extends React.Component<$FlowFixMeProps, $FlowFixMeState> {
+  state = {
+    native: new Animated.Value(0),
+    toNative: new Animated.Value(0),
+    js: new Animated.Value(0),
+    toJS: new Animated.Value(0),
+  };
+
+  componentDidMount() {
+    // we configure spring to take a bit of time to settle so that the user
+    // have time to click many times and see "toValue" getting updated and
+    const longSettlingSpring = {
+      tension: 20,
+      friction: 0.5,
+    };
+    Animated.spring(this.state.native, {
+      ...longSettlingSpring,
+      toValue: this.state.toNative,
+      useNativeDriver: true,
+    }).start();
+    Animated.spring(this.state.js, {
+      ...longSettlingSpring,
+      toValue: this.state.toJS,
+      useNativeDriver: false,
+    }).start();
+  }
+
+  onPress = () => {
+    // select next value to be tracked by random
+    const nextValue = Math.random() * 200;
+    this.state.toNative.setValue(nextValue);
+    this.state.toJS.setValue(nextValue);
+  };
+
+  renderBlock = (anim, dest) => [
+    <Animated.View key="line" style={[styles.line, { transform: [{ translateX: dest }]}]}/>,
+    <Animated.View key="block" style={[styles.block, { transform: [{ translateX: anim }]}]}/>,
+  ]
+
+  render() {
+    return (
+      <TouchableWithoutFeedback onPress={this.onPress}>
+        <View>
+          <View>
+            <Text>Native:</Text>
+          </View>
+          <View style={styles.row}>
+            {this.renderBlock(this.state.native, this.state.toNative)}
+          </View>
+          <View>
+            <Text>JavaScript:</Text>
+          </View>
+          <View style={styles.row}>
+            {this.renderBlock(this.state.js, this.state.toJS)}
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  }
+}
+
 const styles = StyleSheet.create({
   row: {
     padding: 10,
@@ -264,6 +323,14 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     backgroundColor: 'blue',
+  },
+  line: {
+    position: 'absolute',
+    left: 35,
+    top: 0,
+    bottom: 0,
+    width: 1,
+    backgroundColor: 'red',
   },
 });
 
@@ -352,6 +419,48 @@ exports.examples = [
                     anim.interpolate({
                       inputRange: [0, 1],
                       outputRange: [0.25, 1],
+                    }),
+                  ),
+                },
+              ]}
+            />
+          )}
+        </Tester>
+      );
+    },
+  },
+  {
+    title: 'Multistage With Subtract',
+    render: function() {
+      return (
+        <Tester type="timing" config={{duration: 1000}}>
+          {anim => (
+            <Animated.View
+              style={[
+                styles.block,
+                {
+                  transform: [
+                    {
+                      translateX: anim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 200],
+                      }),
+                    },
+                    {
+                      translateY: anim.interpolate({
+                        inputRange: [0, 0.5, 1],
+                        outputRange: [0, 50, 0],
+                      }),
+                    },
+                  ],
+                  opacity: Animated.subtract(
+                    anim.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [1, 1],
+                    }),
+                    anim.interpolate({
+                      inputRange: [0, 0.5, 1],
+                      outputRange: [0, 0.5, 0],
                     }),
                   ),
                 },
@@ -538,6 +647,12 @@ exports.examples = [
     title: 'Animated events',
     render: function() {
       return <EventExample />;
+    },
+  },
+  {
+    title: 'Animated Tracking - tap me many times',
+    render: function() {
+      return <TrackingExample />;
     },
   },
   {

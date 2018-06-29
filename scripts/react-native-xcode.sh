@@ -109,6 +109,11 @@ if [[ "$CONFIGURATION" = *"Debug"* && ! "$PLATFORM_NAME" == *simulator ]]; then
   $PLISTBUDDY -c "Add NSAppTransportSecurity:NSExceptionDomains:localhost:NSTemporaryExceptionAllowsInsecureHTTPLoads bool true" "$PLIST"
   $PLISTBUDDY -c "Add NSAppTransportSecurity:NSExceptionDomains:$IP:NSTemporaryExceptionAllowsInsecureHTTPLoads bool true" "$PLIST"
   echo "$IP" > "$DEST/ip.txt"
+  if [[ "$FORCE_BUNDLING" ]]; then
+    echo "FORCE BUNDLING, WILL BUNDLE INTO DEVICE"
+  else 
+    exit 0
+  fi
 fi
 
 BUNDLE_FILE="$DEST/main.jsbundle"

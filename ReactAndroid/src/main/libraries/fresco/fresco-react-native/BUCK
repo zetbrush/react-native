@@ -8,8 +8,8 @@ rn_android_prebuilt_aar(
 
 remote_file(
     name = "fresco-binary-aar",
-    sha1 = "c6ed3f696ed47dca3b20d4ffbd0600c94b9119b2",
-    url = "mvn:com.facebook.fresco:fresco:aar:1.8.1",
+    sha1 = "a4a6e590e086a8eaf2756517b7938253bd18aa0f",
+    url = "mvn:com.facebook.fresco:fresco:aar:1.12.0",
 )
 
 android_prebuilt_aar(
@@ -20,8 +20,8 @@ android_prebuilt_aar(
 
 remote_file(
     name = "drawee-binary-aar",
-    sha1 = "6bc689901ddcac8f3df5ba4db1f8aabeb8e80107",
-    url = "mvn:com.facebook.fresco:drawee:aar:1.8.1",
+    sha1 = "123fa1114978d0eedc5fb6924d220170846176bd",
+    url = "mvn:com.facebook.fresco:drawee:aar:1.12.0",
 )
 
 rn_android_library(
@@ -42,8 +42,8 @@ rn_android_prebuilt_aar(
 
 remote_file(
     name = "imagepipeline-base-aar",
-    sha1 = "42fd80c46a853850dfc0d71808b982fef401c841",
-    url = "mvn:com.facebook.fresco:imagepipeline-base:aar:1.8.1",
+    sha1 = "ac7c7a8dcab6bc84bca077c088fe1a7a107c5ac8",
+    url = "mvn:com.facebook.fresco:imagepipeline-base:aar:1.12.0",
 )
 
 rn_android_prebuilt_aar(
@@ -54,8 +54,8 @@ rn_android_prebuilt_aar(
 
 remote_file(
     name = "imagepipeline-aar",
-    sha1 = "06a2a4c3e1d9a7fb7d7f1ad14db63e2d32ef0b61",
-    url = "mvn:com.facebook.fresco:imagepipeline:aar:1.8.1",
+    sha1 = "dc18df1518ac8a6ec6b3daeac5e3c3b00ba443df",
+    url = "mvn:com.facebook.fresco:imagepipeline:aar:1.12.0",
 )
 
 rn_prebuilt_jar(
@@ -78,8 +78,8 @@ android_prebuilt_aar(
 
 remote_file(
     name = "fbcore-aar",
-    sha1 = "99b7a83946e16f037149e4cd3abfd6840a09445d",
-    url = "mvn:com.facebook.fresco:fbcore:aar:1.8.1",
+    sha1 = "37ed94df933574c625e8f64d0b0ad1331bcb34f9",
+    url = "mvn:com.facebook.fresco:fbcore:aar:1.12.0",
 )
 
 android_prebuilt_aar(
@@ -90,6 +90,6 @@ android_prebuilt_aar(
 
 remote_file(
     name = "imagepipeline-okhttp3-binary-aar",
-    sha1 = "751f19412e1843b1c1e76eae46e388fb1deddbcc",
-    url = "mvn:com.facebook.fresco:imagepipeline-okhttp3:aar:1.8.1",
+    sha1 = "7a7b03cecd00526c7d6e42457879501411d291c9",
+    url = "mvn:com.facebook.fresco:imagepipeline-okhttp3:aar:1.12.0",
 )

@@ -49,19 +49,19 @@
     <dependency>
       <groupId>com.facebook.fresco</groupId>
       <artifactId>fresco</artifactId>
-      <version>1.8.1</version>
+      <version>1.12.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.facebook.fresco</groupId>
       <artifactId>imagepipeline-okhttp3</artifactId>
-      <version>1.8.1</version>
+      <version>1.12.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.facebook.soloader</groupId>
       <artifactId>soloader</artifactId>
-      <version>0.3.0</version>
+      <version>0.6.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:hovox/react-native.git"
+    "url": "git@github.com:zetbrush/react-native.git"
   },
   "engines": {
     "node": ">=4"

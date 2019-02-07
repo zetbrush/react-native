@@ -29,6 +29,24 @@
   </scm>
   <dependencies>
     <dependency>
+      <groupId>com.facebook.fresco</groupId>
+      <artifactId>fresco</artifactId>
+      <version>1.11.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.facebook.fresco</groupId>
+      <artifactId>imagepipeline-okhttp3</artifactId>
+      <version>1.11.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.facebook.soloader</groupId>
+      <artifactId>soloader</artifactId>
+      <version>0.6.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>javax.inject</groupId>
       <artifactId>javax.inject</artifactId>
       <version>1</version>
@@ -44,24 +62,6 @@
       <groupId>com.facebook.fbui.textlayoutbuilder</groupId>
       <artifactId>textlayoutbuilder</artifactId>
       <version>1.0.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.facebook.fresco</groupId>
-      <artifactId>fresco</artifactId>
-      <version>1.12.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.facebook.fresco</groupId>
-      <artifactId>imagepipeline-okhttp3</artifactId>
-      <version>1.12.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.facebook.soloader</groupId>
-      <artifactId>soloader</artifactId>
-      <version>0.6.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

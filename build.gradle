@@ -19,6 +19,7 @@ allprojects {
     repositories {
         jcenter()
         mavenLocal()
+        google()
 
         def androidSdk = System.getenv("ANDROID_SDK")
         maven {
